@@ -374,6 +374,7 @@ Output:
  Public Relations | Hermann    | Munich
  Accounting       | Shelley    | Seattle
 (11 rows)
+
 10. Write a query to display job title, employee name, and the difference between salary of the employee and minimum salary for the job.
 SELECT job_title, first_name, salary-min_salary 'Difference(Salary - Min Salary)'
 FROM employees NATURAL JOIN jobs;
@@ -488,3 +489,119 @@ Output:
  Accounting Manager              | Shelley     |  3800.00
  Public Accountant               | William     |  4100.00
 (107 rows)
+
+11. Write a query to display the job history that were done by any employee who is currently drawing more than 10000 of salary.
+
+SELECT job.* FROM job_history job 
+JOIN employees e 
+ON (job.employee_id = e.employee_id) 
+WHERE salary > 10000;
+
+Output:
+ employee_id | start_date |  end_date  |   job_id   | department_id
+-------------+------------+------------+------------+---------------
+         101 | 1997-09-21 | 2001-10-27 | AC_ACCOUNT |           110
+         101 | 2001-10-28 | 2005-03-15 | AC_MGR     |           110
+         102 | 2001-01-13 | 2006-07-24 | IT_PROG    |            60
+         114 | 2006-03-24 | 2007-12-31 | ST_CLERK   |            50
+         201 | 2004-02-17 | 2007-12-19 | MK_REP     |            20
+(5 rows)
+
+12. Write a query to display department name, name (first_name, last_name), hire date, salary of the manager for all managers whose experience is more than 15 years.
+
+SELECT first_name, last_name, hire_date, salary, 
+DATE_PART('day', (now() - hire_date))/365 Experience 
+FROM departments d JOIN employees e 
+ON (d.manager_id = e.employee_id) 
+WHERE DATE_PART('day', (now() - hire_date))/365>15;
+
+Output:
+ first_name | last_name | hire_date  |  salary  |     experience
+------------+-----------+------------+----------+------------------
+ Steven     | King      | 2003-06-17 | 24000.00 | 18.6821917808219
+ Alexander  | Hunold    | 2006-01-03 |  9000.00 | 16.1315068493151
+ Nancy      | Greenberg | 2002-08-17 | 12000.00 | 19.5150684931507
+ Den        | Raphaely  | 2002-12-07 | 11000.00 | 19.2082191780822
+ Adam       | Fripp     | 2005-04-10 |  8200.00 | 16.8657534246575
+ John       | Russell   | 2004-10-01 | 14000.00 | 17.3890410958904
+ Jennifer   | Whalen    | 2003-09-17 |  4400.00 | 18.4301369863014
+ Michael    | Hartstein | 2004-02-17 | 13000.00 | 18.0109589041096
+ Susan      | Mavris    | 2002-06-07 |  6500.00 | 19.7095890410959
+ Hermann    | Baer      | 2002-06-07 | 10000.00 | 19.7095890410959
+ Shelley    | Higgins   | 2002-06-07 | 12000.00 | 19.7095890410959
+(11 rows)
+
+13. Write a query to display the job title and salary below the average salary of employees.
+
+SELECT job_title, AVG(salary)
+FROM employees NATURAL JOIN jobs 
+GROUP BY job_title; 
+
+Output:
+            job_title            |          avg
+---------------------------------+------------------------
+ Marketing Manager               | 13000.0000000000000000
+ Marketing Representative        |  6000.0000000000000000
+ Finance Manager                 | 12000.0000000000000000
+ Shipping Clerk                  |  3215.0000000000000000
+ Public Accountant               |  8300.0000000000000000
+ Administration Vice President   |     17000.000000000000
+ Programmer                      |  5760.0000000000000000
+ Accountant                      |  7920.0000000000000000
+ Purchasing Clerk                |  2780.0000000000000000
+ Public Relations Representative | 10000.0000000000000000
+ Purchasing Manager              | 11000.0000000000000000
+ Administration Assistant        |  4400.0000000000000000
+ Sales Manager                   |     12200.000000000000
+ Sales Representative            |  8350.0000000000000000
+ President                       |     24000.000000000000
+ Stock Manager                   |  7280.0000000000000000
+ Human Resources Representative  |  6500.0000000000000000
+ Accounting Manager              | 12000.0000000000000000
+ Stock Clerk                     |  2785.0000000000000000
+(19 rows)
+
+14. Write a query to display the job title and salary of 10% above of the average salary of employees.
+
+SELECT job_title, avg(salary) 
+FROM employees NATURAL JOIN jobs 
+WHERE salary > ( SELECT avg(salary) 
+                FROM employees  
+                ) 
+GROUP BY job_title;
+
+Output:
+            job_title            |          avg
+---------------------------------+------------------------
+ Marketing Manager               | 13000.0000000000000000
+ Finance Manager                 | 12000.0000000000000000
+ Public Accountant               |  8300.0000000000000000
+ Administration Vice President   |     17000.000000000000
+ Programmer                      |  9000.0000000000000000
+ Accountant                      |  7920.0000000000000000
+ Public Relations Representative | 10000.0000000000000000
+ Purchasing Manager              | 11000.0000000000000000
+ Sales Manager                   |     12200.000000000000
+ Sales Representative            |  8676.9230769230769231
+ President                       |     24000.000000000000
+ Stock Manager                   |  7650.0000000000000000
+ Human Resources Representative  |  6500.0000000000000000
+ Accounting Manager              | 12000.0000000000000000
+(14 rows)
+
+15. Write a query to display the job history that were done by any employee who is currently drawing more than 1/3rd of the highest salary of the employees.
+
+SELECT employee_id, start_date, end_date, job_id, department_id 
+FROM jobs NATURAL JOIN job_history jh 
+WHERE ( SELECT salary FROM employees WHERE jh.employee_id = employees.employee_id ) > max_salary;
+                      
+Output:
+ employee_id | start_date |  end_date  |   job_id   | department_id
+-------------+------------+------------+------------+---------------
+         101 | 2001-10-28 | 2005-03-15 | AC_MGR     |           110
+         101 | 1997-09-21 | 2001-10-27 | AC_ACCOUNT |           110
+         114 | 2006-03-24 | 2007-12-31 | ST_CLERK   |            50
+         122 | 2007-01-01 | 2007-12-31 | ST_CLERK   |            50
+         102 | 2001-01-13 | 2006-07-24 | IT_PROG    |            60
+         201 | 2004-02-17 | 2007-12-19 | MK_REP     |            20
+(6 rows)
