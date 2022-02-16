@@ -5,9 +5,6 @@ Executing Queries:
 SELECT location_id, street_address, city, state_province, country_name 
 FROM locations NATURAL JOIN countries; 
 
-Output: 
-week3=# SELECT location_id, street_address, city, state_province, country_name
-week3-# FROM locations NATURAL JOIN countries;
  location_id |      street_address       |        city         |  state_province  |       country_name
 -------------+---------------------------+---------------------+------------------+--------------------------
         2200 | 12-98 Victoria Street     | Sydney              | New South Wales  | Australia
