@@ -32,7 +32,7 @@ week3-# FROM locations NATURAL JOIN countries;
         1500 | 2011 Interiors Blvd       | South San Francisco | California       | United States of America
         1400 | 2014 Jabberwocky Rd       | Southlake           | Texas            | United States of America
 (21 rows)
-
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 2. Write a query to find the name (first_name, last name), department ID and name of all the employees.
 
@@ -150,7 +150,7 @@ Output:
  Shelley     | Higgins     |           110 | Accounting
  William     | Gietz       |           110 | Accounting
 (106 rows)
-
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 3. Write a query to find the name (first_name, last_name), job, department ID and name of the employees who works in London.
 
@@ -165,7 +165,7 @@ Output:
 ------------+-----------+--------+---------------+-----------------
  Susan      | Mavris    | HR_REP |            40 | Human Resources
 (1 row)
-
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 4. Write a query to find the employee id, name (last_name) along with their manager_id and name (last_name).
 
@@ -284,7 +284,7 @@ Output:
          205 | Higgins       |        101 | Kochhar
          206 | Gietz         |        205 | Higgins
 (106 rows)
-
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 5. Write a query to find the name (first_name, last_name) and hire date of the employees who was hired after 'Jones'.
 
@@ -322,7 +322,7 @@ Output:
  Donald     | OConnell   | 2007-06-21
  Douglas    | Grant      | 2008-01-13
 (25 rows)
-
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 6. Write a query to get the department name and number of employees in the department.
 
@@ -347,7 +347,7 @@ Output:
  Sales            |    34
  Shipping         |    45
 (11 rows)
-
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 7. Write a query to find the employee ID, job title, number of days between ending date and starting date for all jobs in department 90.
 
@@ -384,7 +384,7 @@ Output:
             70 | Public Relations |        204 | Hermann
            110 | Accounting       |        205 | Shelley
 (11 rows)
-
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 9. Write a query to display the department name, manager name, and city.
 
@@ -408,6 +408,7 @@ Output:
  Public Relations | Hermann    | Munich
  Accounting       | Shelley    | Seattle
 (11 rows)
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 10. Write a query to display job title, employee name, and the difference between salary of the employee and minimum salary for the job.
 
@@ -542,6 +543,7 @@ Output:
          114 | 2006-03-24 | 2007-12-31 | ST_CLERK   |            50
          201 | 2004-02-17 | 2007-12-19 | MK_REP     |            20
 (5 rows)
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 12. Write a query to display department name, name (first_name, last_name), hire date, salary of the manager for all managers whose experience is more than 15 years.
 
@@ -566,6 +568,7 @@ Output:
  Hermann    | Baer      | 2002-06-07 | 10000.00 | 19.7095890410959
  Shelley    | Higgins   | 2002-06-07 | 12000.00 | 19.7095890410959
 (11 rows)
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 13. Write a query to display the job title and salary below the average salary of employees.
 
@@ -596,6 +599,7 @@ Output:
  Accounting Manager              | 12000.0000000000000000
  Stock Clerk                     |  2785.0000000000000000
 (19 rows)
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 14. Write a query to display the job title and salary of 10% above of the average salary of employees.
 
@@ -623,6 +627,7 @@ Output:
  Stock Manager                   |  8033.3333333333333333
  Accounting Manager              | 12000.0000000000000000
 (13 rows)
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 15. Write a query to display the job history that were done by any employee who is currently drawing more than 1/3rd of the highest salary of the employees.
 
