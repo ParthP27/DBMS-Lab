@@ -623,3 +623,165 @@ Output:
          200 | Administration Assistant | 2100
          200 | Public Accountant        | 1644
 (2 rows)
+
+8. Write a query to display the department ID and name and first name of manager.
+
+SELECT d.department_id, d.department_name, d.manager_id, e.first_name
+FROM departments d INNER JOIN employees e
+ON (d.manager_id = e.employee_id);
+
+Output:
+ department_id | department_name  | manager_id | first_name
+---------------+------------------+------------+------------
+            90 | Executive        |        100 | Steven
+            60 | IT               |        103 | Alexander
+           100 | Finance          |        108 | Nancy
+            30 | Purchasing       |        114 | Den
+            50 | Shipping         |        121 | Adam
+            80 | Sales            |        145 | John
+            10 | Administration   |        200 | Jennifer
+            20 | Marketing        |        201 | Michael
+            40 | Human Resources  |        203 | Susan
+            70 | Public Relations |        204 | Hermann
+           110 | Accounting       |        205 | Shelley
+(11 rows)
+
+9. Write a query to display the department name, manager name, and city.
+
+SELECT d.department_name, e.first_name, l.city
+FROM departments d JOIN employees e
+ON (d.manager_id = e.employee_id) 
+JOIN locations l USING (location_id);
+
+Output:
+ department_name  | first_name |        city
+------------------+------------+---------------------
+ Executive        | Steven     | Seattle
+ IT               | Alexander  | Southlake
+ Finance          | Nancy      | Seattle
+ Purchasing       | Den        | Seattle
+ Shipping         | Adam       | South San Francisco
+ Sales            | John       | OX9 9ZB
+ Administration   | Jennifer   | Seattle
+ Marketing        | Michael    | Toronto
+ Human Resources  | Susan      | London
+ Public Relations | Hermann    | Munich
+ Accounting       | Shelley    | Seattle
+(11 rows)
+
+10. Write a query to display job title, employee name, and the difference between salary of the employee and minimum salary for the job.
+
+SELECT job_title, first_name, salary-min_salary 'Difference(Salary - Min Salary)'
+FROM employees NATURAL JOIN jobs;
+
+Output:
+            job_title            | first_name  | Difference(Salary - Min Salary)
+---------------------------------+-------------+----------
+ President                       | Steven      |  4000.00
+ Administration Vice President   | Neena       |  2000.00
+ Administration Vice President   | Lex         |  2000.00
+ Programmer                      | Alexander   |  5000.00
+ Programmer                      | Bruce       |  2000.00
+ Programmer                      | David       |   800.00
+ Programmer                      | Valli       |   800.00
+ Programmer                      | Diana       |   200.00
+ Finance Manager                 | Nancy       |  3800.00
+ Accountant                      | Daniel      |  4800.00
+ Accountant                      | John        |  4000.00
+ Accountant                      | Ismael      |  3500.00
+ Accountant                      | Jose Manuel |  3600.00
+ Accountant                      | Luis        |  2700.00
+ Purchasing Manager              | Den         |  3000.00
+ Purchasing Clerk                | Alexander   |   600.00
+ Purchasing Clerk                | Shelli      |   400.00
+ Purchasing Clerk                | Sigal       |   300.00
+ Purchasing Clerk                | Guy         |   100.00
+ Purchasing Clerk                | Karen       |     0.00
+ Stock Manager                   | Matthew     |  2500.00
+ Stock Manager                   | Adam        |  2700.00
+ Stock Manager                   | Payam       |  2400.00
+ Stock Manager                   | Shanta      |  1000.00
+ Stock Manager                   | Kevin       |   300.00
+ Stock Clerk                     | Julia       |  1200.00
+ Stock Clerk                     | Irene       |   700.00
+ Stock Clerk                     | James       |   400.00
+ Stock Clerk                     | Steven      |   200.00
+ Stock Clerk                     | Laura       |  1300.00
+ Stock Clerk                     | Mozhe       |   800.00
+ Stock Clerk                     | James       |   500.00
+ Stock Clerk                     | TJ          |   100.00
+ Stock Clerk                     | Jason       |  1300.00
+ Stock Clerk                     | Michael     |   900.00
+ Stock Clerk                     | Ki          |   400.00
+ Stock Clerk                     | Hazel       |   200.00
+ Stock Clerk                     | Renske      |  1600.00
+ Stock Clerk                     | Stephen     |  1200.00
+ Stock Clerk                     | John        |   700.00
+ Stock Clerk                     | Joshua      |   500.00
+ Stock Clerk                     | Trenna      |  1500.00
+ Stock Clerk                     | Curtis      |  1100.00
+ Stock Clerk                     | Randall     |   600.00
+ Stock Clerk                     | Peter       |   500.00
+ Sales Manager                   | John        |  4000.00
+ Sales Manager                   | Karen       |  3500.00
+ Sales Manager                   | Alberto     |  2000.00
+ Sales Manager                   | Gerald      |  1000.00
+ Sales Manager                   | Eleni       |   500.00
+ Sales Representative            | Peter       |  4000.00
+ Sales Representative            | David       |  3500.00
+ Sales Representative            | Peter       |  3000.00
+ Sales Representative            | Christopher |  2000.00
+ Sales Representative            | Nanette     |  1500.00
+ Sales Representative            | Oliver      |  1000.00
+ Sales Representative            | Janette     |  4000.00
+ Sales Representative            | Patrick     |  3500.00
+ Sales Representative            | Allan       |  3000.00
+ Sales Representative            | Lindsey     |  2000.00
+ Sales Representative            | Louise      |  1500.00
+ Sales Representative            | Sarath      |  1000.00
+ Sales Representative            | Clara       |  4500.00
+ Sales Representative            | Danielle    |  3500.00
+ Sales Representative            | Mattea      |  1200.00
+ Sales Representative            | David       |   800.00
+ Sales Representative            | Sundar      |   400.00
+ Sales Representative            | Amit        |   200.00
+ Sales Representative            | Lisa        |  5500.00
+ Sales Representative            | Harrison    |  4000.00
+ Sales Representative            | Tayler      |  3600.00
+ Sales Representative            | William     |  1400.00
+ Sales Representative            | Elizabeth   |  1300.00
+ Sales Representative            | Sundita     |   100.00
+ Sales Representative            | Ellen       |  5000.00
+ Sales Representative            | Alyssa      |  2800.00
+ Sales Representative            | Jonathon    |  2600.00
+ Sales Representative            | Jack        |  2400.00
+ Sales Representative            | Kimberely   |  1000.00
+ Sales Representative            | Charles     |   200.00
+ Shipping Clerk                  | Winston     |   700.00
+ Shipping Clerk                  | Jean        |   600.00
+ Shipping Clerk                  | Martha      |     0.00
+ Shipping Clerk                  | Girard      |   300.00
+ Shipping Clerk                  | Nandita     |  1700.00
+ Shipping Clerk                  | Alexis      |  1600.00
+ Shipping Clerk                  | Julia       |   900.00
+ Shipping Clerk                  | Anthony     |   500.00
+ Shipping Clerk                  | Kelly       |  1300.00
+ Shipping Clerk                  | Jennifer    |  1100.00
+ Shipping Clerk                  | Timothy     |   400.00
+ Shipping Clerk                  | Randall     |     0.00
+ Shipping Clerk                  | Sarah       |  1500.00
+ Shipping Clerk                  | Britney     |  1400.00
+ Shipping Clerk                  | Samuel      |   700.00
+ Shipping Clerk                  | Vance       |   300.00
+ Shipping Clerk                  | Alana       |   600.00
+ Shipping Clerk                  | Kevin       |   500.00
+ Shipping Clerk                  | Donald      |   100.00
+ Shipping Clerk                  | Douglas     |   100.00
+ Administration Assistant        | Jennifer    |  1400.00
+ Marketing Manager               | Michael     |  4000.00
+ Marketing Representative        | Pat         |  2000.00
+ Human Resources Representative  | Susan       |  2500.00
+ Public Relations Representative | Hermann     |  5500.00
+ Accounting Manager              | Shelley     |  3800.00
+ Public Accountant               | William     |  4100.00
+(107 rows)
