@@ -266,3 +266,5 @@ week3=# select * from job_grades;
  E           |      15000 |       24999
  F           |      25000 |       40000
 (6 rows)
+
+** 1. Write a query to find the addresses (location_id, street_address, city, state_province, country_name) of all the departments. **
