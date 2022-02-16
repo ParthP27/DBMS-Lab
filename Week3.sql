@@ -1,3 +1,5 @@
+// To Download Database: https://www.w3resource.com/sql-exercises/sqlex.tar.gz.
+
 Week 3
 
 Table: Regions
