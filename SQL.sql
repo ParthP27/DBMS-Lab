@@ -1,7 +1,10 @@
 Executing Queries:
+
 1. Write a query to find the addresses (location_id, street_address, city, state_province, country_name) of all the departments.
-SELECT location_id, street_address, city, state_province, country_name
-FROM locations NATURAL JOIN countries;
+
+SELECT location_id, street_address, city, state_province, country_name 
+FROM locations NATURAL JOIN countries; 
+
 Output: 
 week3=# SELECT location_id, street_address, city, state_province, country_name
 week3-# FROM locations NATURAL JOIN countries;
@@ -29,11 +32,15 @@ week3-# FROM locations NATURAL JOIN countries;
         1500 | 2011 Interiors Blvd       | South San Francisco | California       | United States of America
         1400 | 2014 Jabberwocky Rd       | Southlake           | Texas            | United States of America
 (21 rows)
+
+
 2. Write a query to find the name (first_name, last name), department ID and name of all the employees.
+
+SELECT first_name, last_name, department_id, department_name 
+FROM employees JOIN departments 
+USING (department_id);
+
 Output:
-week3=# SELECT first_name, last_name, department_id, department_name
-week3-# FROM employees JOIN departments
-week3-# USING (department_id);
  first_name  |  last_name  | department_id | department_name
 -------------+-------------+---------------+------------------
  Steven      | King        |            90 | Executive
@@ -143,23 +150,30 @@ week3-# USING (department_id);
  Shelley     | Higgins     |           110 | Accounting
  William     | Gietz       |           110 | Accounting
 (106 rows)
+
+
 3. Write a query to find the name (first_name, last_name), job, department ID and name of the employees who works in London.
-SELECT e.first_name, e.last_name, e.job_id, e.department_id, d.department_name
-ON e.department_id = d.department_id
-INNER JOIN locations l
-ON d.location_id = l.location_id
-WHERE l.city = 'London';
+
+SELECT e.first_name, e.last_name, e.job_id, e.department_id, d.department_name 
+ON e.department_id = d.department_id 
+INNER JOIN locations l 
+ON d.location_id = l.location_id 
+WHERE l.city = 'London'; 
  
 Output:
  first_name | last_name | job_id | department_id | department_name
 ------------+-----------+--------+---------------+-----------------
  Susan      | Mavris    | HR_REP |            40 | Human Resources
 (1 row)
+
+
 4. Write a query to find the employee id, name (last_name) along with their manager_id and name (last_name).
+
 SELECT e1.employee_id AS  "employee_id", e1.last_name AS "employee_name",
-       e1.manager_id AS  "manager_id", e2.last_name AS "manager_name"
-FROM employees e1 INNER JOIN employees e2
-ON e1.manager_id = e2.employee_id;
+       e1.manager_id AS  "manager_id", e2.last_name AS "manager_name" 
+FROM employees e1 INNER JOIN employees e2 
+ON e1.manager_id = e2.employee_id; 
+
 Output: 
  employee_id | employee_name | manager_id | manager_name
 -------------+---------------+------------+--------------
@@ -270,11 +284,15 @@ Output:
          205 | Higgins       |        101 | Kochhar
          206 | Gietz         |        205 | Higgins
 (106 rows)
+
+
 5. Write a query to find the name (first_name, last_name) and hire date of the employees who was hired after 'Jones'.
-SELECT e.first_name, e.last_name, e.hire_date
-FROM employees e JOIN employees e2
-ON (e2.last_name = 'Jones')
+
+SELECT e.first_name, e.last_name, e.hire_date 
+FROM employees e JOIN employees e2 
+ON (e2.last_name = 'Jones') 
 WHERE e2.hire_date < e.hire_date;
+
 Output:
  first_name | last_name  | hire_date
 ------------+------------+------------
@@ -304,12 +322,16 @@ Output:
  Donald     | OConnell   | 2007-06-21
  Douglas    | Grant      | 2008-01-13
 (25 rows)
+
+
 6. Write a query to get the department name and number of employees in the department.
-SELECT department_name, COUNT(*)
-FROM departments INNER JOIN employees
-ON employees.department_id = departments.department_id
-GROUP BY departments.department_id, department_name
+
+SELECT department_name, COUNT(*) 
+FROM departments INNER JOIN employees 
+ON employees.department_id = departments.department_id 
+GROUP BY departments.department_id, department_name 
 ORDER BY department_name;
+
 Output:
  department_name  | count
 ------------------+-------
@@ -325,20 +347,28 @@ Output:
  Sales            |    34
  Shipping         |    45
 (11 rows)
+
+
 7. Write a query to find the employee ID, job title, number of days between ending date and starting date for all jobs in department 90.
-SELECT employee_id, job_title, end_date-start_date Days
-FROM job_history NATURAL JOIN jobs;
+
+SELECT employee_id, job_title, end_date-start_date Days 
+FROM job_history NATURAL JOIN jobs 
 WHERE department_id=90;
+
 Output:
  employee_id |        job_title         | days
 -------------+--------------------------+------
          200 | Administration Assistant | 2100
          200 | Public Accountant        | 1644
 (2 rows)
+
+
 8. Write a query to display the department ID and name and first name of manager.
-SELECT d.department_id, d.department_name, d.manager_id, e.first_name
-FROM departments d INNER JOIN employees e
+
+SELECT d.department_id, d.department_name, d.manager_id, e.first_name 
+FROM departments d INNER JOIN employees e 
 ON (d.manager_id = e.employee_id);
+
 Output:
  department_id | department_name  | manager_id | first_name
 ---------------+------------------+------------+------------
@@ -354,11 +384,15 @@ Output:
             70 | Public Relations |        204 | Hermann
            110 | Accounting       |        205 | Shelley
 (11 rows)
+
+
 9. Write a query to display the department name, manager name, and city.
-SELECT d.department_name, e.first_name, l.city
-FROM departments d JOIN employees e
+
+SELECT d.department_name, e.first_name, l.city 
+FROM departments d JOIN employees e 
 ON (d.manager_id = e.employee_id) 
 JOIN locations l USING (location_id);
+
 Output:
  department_name  | first_name |        city
 ------------------+------------+---------------------
@@ -376,8 +410,10 @@ Output:
 (11 rows)
 
 10. Write a query to display job title, employee name, and the difference between salary of the employee and minimum salary for the job.
-SELECT job_title, first_name, salary-min_salary 'Difference(Salary - Min Salary)'
+
+SELECT job_title, first_name, salary-min_salary 'Difference(Salary - Min Salary)' 
 FROM employees NATURAL JOIN jobs;
+
 Output:
             job_title            | first_name  | Difference(Salary - Min Salary)
 ---------------------------------+-------------+----------
@@ -565,7 +601,7 @@ Output:
 
 SELECT job_title, avg(salary) 
 FROM employees NATURAL JOIN jobs 
-WHERE salary > ( SELECT avg(salary) 
+WHERE salary > 1.1 * ( SELECT avg(salary) 
                 FROM employees  
                 ) 
 GROUP BY job_title;
@@ -578,16 +614,15 @@ Output:
  Public Accountant               |  8300.0000000000000000
  Administration Vice President   |     17000.000000000000
  Programmer                      |  9000.0000000000000000
- Accountant                      |  7920.0000000000000000
+ Accountant                      |  8175.0000000000000000
  Public Relations Representative | 10000.0000000000000000
  Purchasing Manager              | 11000.0000000000000000
  Sales Manager                   |     12200.000000000000
- Sales Representative            |  8676.9230769230769231
+ Sales Representative            |  8990.9090909090909091
  President                       |     24000.000000000000
- Stock Manager                   |  7650.0000000000000000
- Human Resources Representative  |  6500.0000000000000000
+ Stock Manager                   |  8033.3333333333333333
  Accounting Manager              | 12000.0000000000000000
-(14 rows)
+(13 rows)
 
 15. Write a query to display the job history that were done by any employee who is currently drawing more than 1/3rd of the highest salary of the employees.
 
